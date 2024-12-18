@@ -1,30 +1,34 @@
 import { useState } from "react";
-import { Button, StyleSheet, TextInput, View, TouchableOpacity, Text} from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text} from "react-native";
 import QRCode from "react-native-qrcode-svg";
-
 
 export default function Home() {
 
-    // const [text, setText] = useState("");
+    const [text, setText] = useState('');
+    const [qrCode, setQrCode] = useState('');
 
     return (
         <View style={ styles.container }>
             <TextInput 
-            placeholder="Digite seu texto"
-            style={ styles.input }
-            // onChangeText={}
+                placeholder="Digite seu texto"
+                style={ styles.input }
+                value={text}
+                onChangeText={setText}
             />
 
             <QRCode 
-            value={ "no value" }
+            value={qrCode || " "}
             logoSize={30}
             logoBackgroundColor="transparent"
             size={200}
+            enableLinearGradient={true}
+            linearGradient={['#042940','blue']}
+            quietZone={5}
             />
-
+            
             <TouchableOpacity 
             style={ styles.button }
-            // onPress={ }
+            onPress={() => setQrCode(text)}
             >
                 <Text style={ styles.buttonText }> Gerar </Text>
             </TouchableOpacity>
