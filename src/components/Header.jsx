@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <View style={ styles.header }>
       <Text style={ styles.text }>
-        Criador de QR-CODE
+        QRCODEGEN
       </Text>
     </View>
   )
@@ -14,11 +14,11 @@ const styles = StyleSheet.create ({
   header: {
     alignItems: 'center',
     padding: 10,
-    fontSize: 30,
   },
   text: {
     color: '#042940',
-    fontSize: 30,
+    fontSize: 16,
     fontWeight: 700,
+    letterSpacing: 20
   }
 });
