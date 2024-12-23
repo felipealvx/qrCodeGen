@@ -4,33 +4,13 @@ import QRCode from "react-native-qrcode-svg";
 import SvgIcon from "../../assets/icons/svg-icon.png";
 import JpgIcon from "../../assets/icons/jpg-icon.png";
 import UploadIcon from "../../assets/icons/upload-icon.png";
-// import RNFS from "react-native-fs"
 
 export default function Home() {
 
     const [text, setText] = useState('');
     const [qrCode, setQrCode] = useState('');
 
-    // const handleDownloadQRcode = async () => {
-    //     try {
-    //         if (Platform.OS === 'android') {
-    //             const granted = await PermissionsAndroid.request(
-    //                 PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
-    //             )
-    //             if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-    //                 alert('Permissões Negadas!')
-    //             }
-    //         }
-    //         await viewShotRef.current.capture().then(async (uri) => {
-    //             const path = RNFS.PicturesDirectoryPath + '/' + qrCode + '.png';
-    //             await RNFS.moveFile(uri, path);
-    //             await RNFS.scanFile(path);
-    //             alert('O QR code foi baixado!')
-    //         })
-    //     } catch (error) {
-    //         console.log (error)
-    //     }
-    // }
+    let logo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzkiicTmxuoKclFoG-ANGgtwZCD_pwAt4SaQ&s'
 
     return (
         <View style={ styles.container }>
@@ -43,6 +23,7 @@ export default function Home() {
                 size={200}
                 color="#1e1e1e"
                 quietZone={5}
+                
                 />
             </View>
 
@@ -68,7 +49,6 @@ export default function Home() {
                 <View style={ styles.saveButtons }>
                     <TouchableOpacity 
                     style={ styles.buttonSave }
-
                     >
                         <Text style={ styles.buttonText }>
                             Baixar JPG
