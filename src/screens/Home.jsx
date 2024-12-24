@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image} from "react-native";
+import { useRef, useState } from "react";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image, Share} from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import SvgIcon from "../../assets/icons/svg-icon.png";
 import JpgIcon from "../../assets/icons/jpg-icon.png";
 import UploadIcon from "../../assets/icons/upload-icon.png";
 import * as ImagePicker from "expo-image-picker";
+import { shareAsync } from "expo-sharing";
+import * as FileSystem from "expo-file-system";
 
 export default function Home() {
 
@@ -12,6 +14,7 @@ export default function Home() {
     const [qrCode, setQrCode] = useState('');
     const [image, setImage] = useState(null);
 
+    // add imagem de logo
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'],
@@ -35,7 +38,6 @@ export default function Home() {
                 logoBackgroundColor="transparent"
                 size={200}
                 color="#1e1e1e"
-                quietZone={5}
                 logo={ image }
                 />
             </View>
@@ -64,9 +66,9 @@ export default function Home() {
                 
                 <View style={ styles.saveButtons }>
                     <TouchableOpacity 
-                    style={ styles.buttonSave }
-                    >
-                        <Text style={ styles.buttonText }>
+                    style={ styles.buttonSave }>
+                        <Text 
+                        style={ styles.buttonText }>
                             Baixar JPG
                         </Text>
                         <Image 
@@ -74,8 +76,10 @@ export default function Home() {
                         style={ styles.iconStyle } />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={ styles.buttonSave }>
-                        <Text style={ styles.buttonText }>
+                    <TouchableOpacity 
+                    style={ styles.buttonSave }>
+                        <Text 
+                        style={ styles.buttonText }>
                             Baixar SVG
                         </Text>
                         <Image 
@@ -85,7 +89,6 @@ export default function Home() {
                 </View>
             </View>
         </View>
-        
     );
 }
 
