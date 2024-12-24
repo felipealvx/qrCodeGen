@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Home from './src/screens/Home';
 import Header from './src/components/Header';

@@ -1,29 +1,42 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image, Platform, PermissionsAndroid} from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image} from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import SvgIcon from "../../assets/icons/svg-icon.png";
 import JpgIcon from "../../assets/icons/jpg-icon.png";
 import UploadIcon from "../../assets/icons/upload-icon.png";
+import * as ImagePicker from "expo-image-picker";
 
 export default function Home() {
 
     const [text, setText] = useState('');
     const [qrCode, setQrCode] = useState('');
+    const [image, setImage] = useState(null);
 
-    let logo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzkiicTmxuoKclFoG-ANGgtwZCD_pwAt4SaQ&s'
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images'],
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 1,
+        });
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri)
+        }
+    };
 
     return (
         <View style={ styles.container }>
-
             <View style={ styles.qrCode }>
                 <QRCode 
                 value={qrCode || " "}
-                logoSize={30}
+                logoSize={50}
                 logoBackgroundColor="transparent"
                 size={200}
                 color="#1e1e1e"
                 quietZone={5}
-                
+                logo={ image }
                 />
             </View>
 
@@ -37,13 +50,16 @@ export default function Home() {
                 />
 
                 <TouchableOpacity
-                style={ styles.button }>
+                style={ styles.button }
+                onPress={pickImage}
+                >
                     <Text style={ styles.buttonText }>
                         Inserir Logo
                     </Text>
                     <Image 
                     source={UploadIcon} 
-                    style={ styles.iconStyle } />
+                    style={ styles.iconStyle }
+                    />
                 </TouchableOpacity>
                 
                 <View style={ styles.saveButtons }>
@@ -91,14 +107,14 @@ const styles = StyleSheet.create ({
     },
     input: {
         backgroundColor: '#fff',
-        borderRadius: 20,
+        borderRadius: 10,
         padding: 20,
         height: 70,
     },
     button: {
         width: '100%',
         backgroundColor: '#2F85ED',
-        borderRadius: 20,
+        borderRadius: 10,
         height: 70,
         justifyContent: 'space-between',
         flexDirection: 'row',
@@ -122,7 +138,7 @@ const styles = StyleSheet.create ({
         width: '47%',
         backgroundColor: '#2F85ED',
         height: 70,
-        borderRadius: 20,
+        borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 20,
@@ -130,6 +146,5 @@ const styles = StyleSheet.create ({
     iconStyle: {
         width: 25,
         height: 25,
-
     },
 })
