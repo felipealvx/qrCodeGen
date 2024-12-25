@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "qrCodeGen",
-    "slug": "qrCodeGen",
+    "slug": "qrcodegen",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -19,7 +19,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#F1F1F1"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.felipealvx.qrCodeGen"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,6 +35,12 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a9c56d07-6043-4c5c-b073-c9562fdd6c92"
+      }
+    },
+    "owner": "felipealvx"
   }
 }

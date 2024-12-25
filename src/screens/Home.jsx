@@ -1,12 +1,15 @@
-import { useRef, useState } from "react";
-import { StyleSheet, TextInput, View, TouchableOpacity, Text, Image, Share} from "react-native";
+import { useState } from "react";
+import {
+    StyleSheet, 
+    TextInput, 
+    View, 
+    TouchableOpacity, 
+    Text, 
+    Image, 
+    useColorScheme } from "react-native";
 import QRCode from "react-native-qrcode-svg";
-import SvgIcon from "../../assets/icons/svg-icon.png";
-import JpgIcon from "../../assets/icons/jpg-icon.png";
 import UploadIcon from "../../assets/icons/upload-icon.png";
 import * as ImagePicker from "expo-image-picker";
-import { shareAsync } from "expo-sharing";
-import * as FileSystem from "expo-file-system";
 
 export default function Home() {
 
@@ -41,16 +44,17 @@ export default function Home() {
                 logo={ image }
                 />
             </View>
-
+            
             <View style={ styles.elements }>
-                <TextInput 
+                <View style={ styles.inputContainer }>
+                    <TextInput 
                     placeholder="Digite seu texto"
                     style={ styles.input }
                     value={text}
                     onChangeText={setText}
                     onChange={() => setQrCode(text)}
-                />
-
+                    />              
+                </View>
                 <TouchableOpacity
                 style={ styles.button }
                 onPress={pickImage}
@@ -63,30 +67,6 @@ export default function Home() {
                     style={ styles.iconStyle }
                     />
                 </TouchableOpacity>
-                
-                <View style={ styles.saveButtons }>
-                    <TouchableOpacity 
-                    style={ styles.buttonSave }>
-                        <Text 
-                        style={ styles.buttonText }>
-                            Baixar JPG
-                        </Text>
-                        <Image 
-                        source={JpgIcon} 
-                        style={ styles.iconStyle } />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity 
-                    style={ styles.buttonSave }>
-                        <Text 
-                        style={ styles.buttonText }>
-                            Baixar SVG
-                        </Text>
-                        <Image 
-                        source={SvgIcon} 
-                        style={ styles.iconStyle } />
-                    </TouchableOpacity>
-                </View>
             </View>
         </View>
     );
@@ -102,7 +82,8 @@ const styles = StyleSheet.create ({
         backgroundColor: '#fff',
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: '#929292'
+        borderColor: '#929292',
+        elevation: 9
     },
     elements: {
         gap: 20,
@@ -113,6 +94,7 @@ const styles = StyleSheet.create ({
         borderRadius: 10,
         padding: 20,
         height: 70,
+        elevation: 9,
     },
     button: {
         width: '100%',
@@ -123,28 +105,12 @@ const styles = StyleSheet.create ({
         flexDirection: 'row',
         padding: 20,
         alignItems: 'center',
+        elevation: 9,
     },
     buttonText: {
         color: '#fff',
         fontWeight: 600,
         textAlign: 'center',
-    },
-    saveButtons: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '100%',
-        gap: 20,
-    },
-    buttonSave: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '47%',
-        backgroundColor: '#2F85ED',
-        height: 70,
-        borderRadius: 10,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 20,
     },
     iconStyle: {
         width: 25,
